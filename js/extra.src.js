@@ -1,0 +1,33 @@
+jQuery.fn.generaNuevosCampos = function(nombreCampo, indice)
+{
+	$(this).each(function(){
+		elem = $(this);
+		elem.data("nombreCampo",nombreCampo);
+		elem.data("indice",indice);
+		
+		elem.click(function(e){
+			e.preventDefault();
+			elem = $(this);
+			nombreCampo = elem.data("nombreCampo");
+			indice = elem.data("indice");
+			texto_insertar = 
+			'<input type="text" name="' + nombreCampo + indice + '" id="' + nombreCampo + indice + '" value="" class="control text modifier-lowercase" style="display: inline; margin-bottom: 5px;"> <select name="type_' + nombreCampo + indice + '" id="type_' + nombreCampo + indice + '" class="control" style="height: 28px; display: inline; margin-bottom: 5px;"><option value="">- select -</option><option value="attack">Attack</option><option value="defense">Defense</option></select> <textarea name="desc_' + nombreCampo + indice + '" id="desc_' + nombreCampo + indice + '" rows="5" cols="80" class="control modifier-lowercase"></textarea><br/>'
+			count_insertar = '<input type="hidden" name="skill_total" id="skill_total" value="' + indice + '" />'
+			indice ++;
+			elem.data("indice",indice);
+			nuevo_campo = $(texto_insertar);
+			elem.before(nuevo_campo);
+			$("#skill_total").remove();
+			nuevo_count = $(count_insertar);
+			elem.before(nuevo_count);
+		});
+		
+	});
+	
+	return this;
+}
+	
+function pagination(page)
+{
+	window.location = "admin.php?page=wpinimat/classifier_creatures&search_text="+document.form1.search_text.value+"&starting="+page;
+}
